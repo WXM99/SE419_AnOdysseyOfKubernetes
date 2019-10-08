@@ -42,13 +42,13 @@
 
 中继器主要功能是通过对数据信号的重新发送或者转发，来扩大网络传输的距离。
 
-![Image](homework1_InfrustructureTechnicalReport.assets/Image.tiff)
+![Image](homework1_InfrustructureTechnicalReport.assets/Image.jpg)
 
 #### 1.3 Concentrator
 
 集线器的主要功能是对接收到的信号进行再生整形放大，以扩大网络的传输距离，同时把所有节点集中在以它为中心的节点上。集线器每个接口简单的收发比特，收到1就转发1，收到0就转发0，不进行碰撞检测。
 
-![Image](homework1_InfrustructureTechnicalReport.assets/Image-0552589.tiff)
+![Image](homework1_InfrustructureTechnicalReport.assets/Image-0552589.jpg)
 
 ### Data Link Layer
 
