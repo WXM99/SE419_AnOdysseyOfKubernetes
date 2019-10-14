@@ -553,6 +553,3 @@ NPU便是在可以用户设备上进行神经网络边缘计算的芯片，在�
 
 reference：
 http://www.elecfans.com/d/622258.html
-
-### FPGA 
-
