@@ -70,56 +70,95 @@ wifi信号强度则与发射功率和天线增益有关。
 
 ### GPU
 
-衡量标准：GPU架构、核心频率、流处理器(CUDA)数量、显存、显存类型、显存位宽、显存频率等
+####  衡量标准：GPU架构、核心频率、流处理器(CUDA)数量、显存、显存类型、显存位宽、显存频率等
 
 常见品牌：AMD Nvidia
 
-N卡效率高，功耗高；A卡理论效率高，但实际效率不如N卡，功耗低。所以坊间流传一段话，游戏选N卡，工作选A卡。
+N卡效率高，功耗高；A卡理论效率高，但实际效率不如N卡，但是A卡功耗低。所以坊间流传一段话，游戏选N卡，工作选A卡。
 
 一般频率高、流处理器数量多的较优。
 
 显存大、位宽大、显存频率高、分辨率高则强，相仿的则可以选择带宽大的(频率乘位宽)。
 
+#### 测试方法
+
+可以使用*3DMARK, GPU-Z, GPU CAPS VIEWERS*等进行测试
+
+![3DMARK](./img-wxr/2.png)
+
+![GPU-Z](./img-wxr/3.png)
+
+![GPU-Z](./img-wxr/4.png)
+
+#### COMMENT
+
+一般办公只需要cpu内置显卡即可，独立显卡游戏选N卡，工作选A卡, 从事3D图像渲染，视频动画制作等工作的需要更加高端的显卡如RTX2080、RTX2080Ti等。
+
 ### TPU
 
-TODO
+TPU是**张量处理单元**，是一种定制化的 ASIC 芯片，它由谷歌从头设计，并专门用于机器学习工作负载。TPU 为谷歌的主要产品提供了计算支持，在 Google Next’18 中，TPU v2 现在已经得到用户的广泛使用
+
+使用RISC指令集的CPU进行的是标量运算, GPU则是矢量运算，但是在神经网络方面存在着较大局限性。Google为TPU设计了MXU作为矩阵处理器，可以在单个时钟周期内处理数十万次运算，也就是矩阵（Matrix）运算
+
+神经网络把输入数据与权重矩阵相乘，并输入激活函数
+
+![](./img-wxr/5.gif)
+
+矩阵乘法的计算量十分巨大，在google实际业务的数据统计(如下表)中,权重矩阵的数据量级在**百万级别**以上，对于CPU或GPU来说负担巨大，作为优化，TPU被设计出来用于这类大运算量的张量运算。
+
+![](./img-wxr/6.jpg)
+
+神经网络的量化技术是一种**使用8位整数来近似预设的最小值和最大值之间任意数值**的优化技术,这种技术允许用整数运算来代替浮点运算，大大减少了TPU的硬件规模和功耗，一个TPU钟包含**65,536个8位整数乘法器**。云环境中使用的主流GPU，通常包含数千个32位浮点乘法器。只要能用8位满足精度需求，就能带来25倍以上的性能提升。
+
+![TPU结构](./img-wxr/7.jpg)
+
+TPU包括以下计算资源：
+
+1. 矩阵乘法单元(MUX)：65,536个8位乘法和加法单元，运行矩阵计算
+
+2. 统一缓冲(UB)：作为寄存器工作的24MB容量SRAM
+
+3. 激活单元(AU)：硬件连接的激活函数
+
+TPU设计封装了神经网络计算的本质，可以针对各种神经网络模型进行编程，使用CISC指令集作为基础支持一系列复杂指令。
+
+为了编程，Google还创建了一个编译器和软件栈，将来自TensorFlow图的API调用，转化成TPU指令。
+
+![TPU应用结构](./img-wxr/8.jpg)
+
+#### 性能对比
+
+TPU的性能功耗比，比同时期的CPU强83倍，比同时期的GPU强29倍。
+
+![TPU性能功耗比](./img-wxr/9.png)
+
+在神经网络运算上面的性能对比,TPU拥有巨大优势。
+
+![性能对比](./img-wxr/10.jpg)
+
+reference: 
+http://www.sohu.com/a/140291947_610300
 
 ### NPU
 
-TODO
+NPU与TPU的定位不同，神经网络的使用分为训练和推理两部分，训练需要庞大的计算，而推理过程的计算量则远少于训练，因此也可以在较为便宜的硬件上进行。NPU的专长在于神经网络的推理过程。
 
-### XPU
+相对于上传数据到服务器，由服务器进行推理再返回的做法，边缘计算具有更好的性能和更低的消耗，这一过程将会减轻可能存在的延迟，功耗和带宽等问题，同时也避免了隐私问题，因为输出端数据永远不会离开用户设备。
 
-据不完全统计，已经被用掉的有：
+NPU便是在可以用户设备上进行神经网络边缘计算的芯片，在神经网络方面相对于CPU, GPU等更具竞争力。
 
-APU -- Accelerated Processing Unit, 加速处理器，AMD公司推出加速图像处理芯片产品。
+鲁大师基准测试软件在最近推出了一个基于人工智能测试的框架，用来测试NPU和高通SNPE框架。目前该基准测试能够测试三种不同的神经网络，VGG16, InceptionV3和ResNet34。
 
-BPU -- Brain Processing Unit, 地平线公司主导的嵌入式处理器架构，并应用于器ADAS产品中。
+![](./img-wxr/11.png)
 
-CPU -- Central Processing Unit 中央处理器， 目前PC core的主流产品。
+当使用CPU来进行运算的时候，通常情况下CPU只能以1-2fps的速率进行计算，而所需要的功耗也异常的高。比如骁龙835和麒麟960的CPU在运算的时候，都需要以超过平均负载的工作负载进行运算。
 
-DPU -- Dataflow Processing Unit 数据流处理器， Wave Computing 公司提出的AI架构；Data storage Processing Unit，深圳大普微的智能固态硬盘处理器。
+相比较而言，高通的Hexagon DSP能够实现相对于CPU5到8倍的性能。
 
-FPU -- Floating Processing Unit 浮点计算单元，通用处理器中的浮点运算模块。
+而华为的NPU的性能则更加明显，相对于ResNet34，NPU能够实现4倍的性能提升。
 
-GPU -- Graphics Processing Unit, 图形处理器，采用多线程SIMD架构，虽然为图形处理而生，但在Nvidia的人工智能布局下，成为了人工智能算法的主要硬件选项。
+reference：
+http://www.elecfans.com/d/622258.html
 
-HPU -- Holographics Processing Unit 全息图像处理器， 微软出品的全息计算芯片与设备。
+### FPGA 
 
-IPU -- Intelligence Processing Unit， Deep Mind投资的Graphcore公司出品的AI处理器产品。
-
-MPU/MCU -- Microprocessor/Micro controller Unit， 微处理器/微控制器，一般用于低计算应用的RISC计算机体系架构产品，如ARM-M系列处理器。
-
-NPU -- Neural Network Processing Unit，神经网络处理器，是基于神经网络算法与加速的新型处理器总称，如中科院计算所/寒武纪公司出品的diannao系列。
-
-RPU -- Radio Processing Unit, 无线电处理器， Imagination Technologies 公司推出的集合集Wifi/蓝牙/FM/处理器为单片的处理器。
-
-TPU -- Tensor Processing Unit 张量处理器， Google 公司推出的加速人工智能算法的专用处理器。目前一代TPU面向Inference，二代面向训练。
-
-VPU -- Vector Processing Unit 矢量处理器，Intel收购的Movidius公司推出的图像处理与人工智能的专用芯片的加速计算核心。
-
-WPU -- Wearable Processing Unit， 可穿戴处理器，Ineda Systems公司推出的可穿戴片上系统产品，包含GPU/MIPS CPU等IP。
-
-XPU -- 百度与Xilinx公司在2017年Hotchips大会上发布的FPGA智能云加速，含256核。
-
-ZPU -- Zylin Processing Unit, 由挪威Zylin 公司推出的一款32位开源处理器。
