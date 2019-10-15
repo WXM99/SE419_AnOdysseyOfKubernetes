@@ -481,11 +481,11 @@ N卡效率高，功耗高；A卡理论效率高，但实际效率不如N卡，�
 
 可以使用*3DMARK, GPU-Z, GPU CAPS VIEWERS*等进行测试
 
-![3DMARK](./img-wxr/2.png)
+![3DMARK](./img-wxr/2.PNG)
 
-![GPU-Z](./img-wxr/3.png)
+![GPU-Z](./img-wxr/3.PNG)
 
-![GPU-Z](./img-wxr/4.png)
+![GPU-Z](./img-wxr/4.PNG)
 
 #### COMMENT
 
