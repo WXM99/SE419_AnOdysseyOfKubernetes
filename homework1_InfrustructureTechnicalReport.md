@@ -443,7 +443,8 @@ RAID 是由多个独立的高性能磁盘驱动器组成的磁盘子系统，从
 
 **HTTP**协议（Hyper Text Transfer Protocol）
 
-## xPU
+#### VENDORS
+
 衡量标准：传输效率、稳定性、端口数量、支持协议、安全性等
 
 品牌：华硕、腾达、华为、普联等
@@ -462,6 +463,8 @@ wifi信号强度则与发射功率和天线增益有关。
 
 路由器内部有cpu、内存等，其算法也会影响效果，若信号强而网速慢则可能是路由器算法的问题。
 
+## xPU
+
 ### GPU
 
 ####  衡量标准：GPU架构、核心频率、流处理器(CUDA)数量、显存、显存类型、显存位宽、显存频率等
@@ -478,11 +481,11 @@ N卡效率高，功耗高；A卡理论效率高，但实际效率不如N卡，�
 
 可以使用*3DMARK, GPU-Z, GPU CAPS VIEWERS*等进行测试
 
-![3DMARK](./img-wxr/2.png)
+![3DMARK](./img-wxr/2.PNG)
 
-![GPU-Z](./img-wxr/3.png)
+![GPU-Z](./img-wxr/3.PNG)
 
-![GPU-Z](./img-wxr/4.png)
+![GPU-Z](./img-wxr/4.PNG)
 
 #### COMMENT
 
