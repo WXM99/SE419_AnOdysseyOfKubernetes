@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Tiny URL</title>
+  <link rel="stylesheet" type="text/css" href="./index.css" />
+  <script src="./index.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <div class="mainClass">
+    <div>
+      <p id="titleId">短链接生成器</p>
+      <button class="urlTypeClass" onclick="selectUrlType(URLTYPE.long)">生成短链接</button>
+      <button class="urlTypeClass" onclick="selectUrlType(URLTYPE.tiny)">查询短链接</button>
+    </div>
+    
+    <div class="turnUrlClass" id="serviceId">
+      <p id="urlTextId"></p>
+      <input id="inputId" onkeypress="listenInput" />
+      <br />
+      <output id="outputId"></output>
+    </div>
+  </div>
+</body>
+</html>
