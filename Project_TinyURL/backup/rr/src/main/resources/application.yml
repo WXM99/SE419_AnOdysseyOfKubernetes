@@ -1,0 +1,20 @@
+server:
+  port: 9001
+  servlet:
+    session:
+      timeout: 10
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  redis:
+    database: 1
+    host: ${host:localhost}
+    port: ${port:6379}
+    password:
+    jedis:
+      pool:
+        max-active: 1500
+        max-wait: -1
+        max-idle: 1000
+        min-idle: 100
+    timeout: 5000
