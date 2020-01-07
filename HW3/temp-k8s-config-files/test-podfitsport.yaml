@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-podfitport
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: test-podfitport
+  template:
+    metadata:
+      labels:
+        app: test-podfitport
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80

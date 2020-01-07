@@ -1,0 +1,36 @@
+.mainClass{
+  width: 600; 
+  height: 500;
+  text-align: center;
+}
+
+.turnUrlClass{
+  width: 300;
+  position: relative;
+  margin: 40px;
+  display: block;
+  visibility: hidden;
+  font-size: 20px;
+}
+
+.urlTypeClass {
+  width: 100px;
+  height: 40px;
+  margin-top: -20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  border-radius: 5%;
+}
+
+#titleId{
+  font-size: 50px;
+}
+
+#inputId{
+  width: 500px; 
+  height: 40px;
+  font-size: 20px;
+  margin-bottom: 30px;
+  border-radius: 5%;
+  text-align: center;
+}
