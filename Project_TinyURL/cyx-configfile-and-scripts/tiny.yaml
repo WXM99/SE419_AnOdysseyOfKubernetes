@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-tinyurl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-tinyurl
+  template:
+    metadata:
+      labels:
+        app: test-tinyurl
+    spec:
+      containers:
+      - name: tinyurl
+        image: wangzhiyuan/backup:latest
+        ports:
+        - containerPort: 9001
+        env:
+        - name: host
+          value: "111.229.216.12"
+        - name: port
+          value: "6380"
+        resources:
+          limits:
+            cpu: 0.5

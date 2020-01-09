@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: tinyurl-ingress
+spec:
+  rules:
+  # 配置七层域名
+  - host: 52.207.245.55
+    http:
+      paths:
+      # 配置Context Path
+      - path: /get
+        backend:
+          serviceName: tinyurl-service
+          servicePort: 9001
+      # 配置Context Path
+      - path: /set
+        backend:
+          serviceName: tinyurl-service
+          servicePort: 9001
